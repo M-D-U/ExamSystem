@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('moduleleader', function (Blueprint $table) {
-            $table->unsignedInteger('staffNumber')->index();
+        Schema::create('studentmodule', function (Blueprint $table) {
+            $table->string('studentNumber')->index();
             $table->string('moduleCode')->index();//this syntax allows relationships between the tables
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('moduleleader');
+        Schema::dropIfExists('studentmodule');
     }
 };
