@@ -1,0 +1,72 @@
+* {
+    box-sizing: border-box;
+}
+
+
+/* Create two equal columns that floats next to each other */
+
+.column {
+    float: left;
+    width: 45%;
+    padding: 10px;
+    margin-right: 30px;
+    animation: reverse;
+    animation-duration: 15s;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    // height: 100vh;
+    /* Should be removed. Only for demonstration */
+}
+
+.illustration {
+    height: 70%;
+    width: 70%;
+    padding: 50px;
+}
+
+
+/* Clear floats after the columns */
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.buttonUpload {
+    margin-top: 15px;
+    background-color: rgb(166, 170, 221);
+    width: 100%;
+}
+
+.buttonUpload:hover {
+    background-color: green;
+    color: white;
+}
+
+label ,h5{
+    margin: 10px 0 10px 10px;
+    // border-bottom: 1px solid gray;
+}
+
+.downloadLink{
+    margin: 10px 0 10px 10px;
+}
+
+.jumbotron{
+    margin-top: 30px;
+}
+
+.form{
+    border: 1px solid gray;
+    margin: 10px 0 0 10px !important;
+}
+
+.btn{
+    width: 100%;
+    margin: 10px 0 0 0;
+}
+
+.submissionInfoDiv{
+    margin: 10px 0 0 10px;
+}

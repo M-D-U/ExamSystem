@@ -1,0 +1,84 @@
+<div class="loginContainer"></div>
+
+<div class="container">
+    <div class="center">
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <h3 style="text-align: center;">Login</h3>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        Student Login
+                    </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <form [formGroup]="reactiveForm" (ngSubmit)="login()" class="form mt-3">
+                            <div class="form-group ">
+                                <input name="email" formControlName="email" type="email" class="form-control"
+                                    placeholder="Student Email">
+                            </div>
+                            <div class="form-group">
+                                <input name="password" formControlName="password" type="password" class="form-control"
+                                    placeholder="Password">
+                            </div>
+                            <button class="btn btn-lg btn-primary btn-block">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                        Lecturer Login
+                    </button>
+                </h2>
+                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <form [formGroup]="reactiveForm" (ngSubmit)="login()" class="form mt-3">
+                            <div class="form-group ">
+                                <input name="email" formControlName="email" type="email" class="form-control"
+                                    placeholder="Lecturer Email">
+                            </div>
+
+                            <div class="form-group">
+                                <input name="password" formControlName="password" type="password" class="form-control"
+                                    placeholder="Password">
+                            </div>
+                            <button class="btn btn-lg btn-primary btn-block">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                        Exam Department
+                    </button>
+                </h2>
+                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
+                    data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <form [formGroup]="reactiveForm" (ngSubmit)="login()" class="form mt-3">
+                            <div class="form-group ">
+                                <input name="email" formControlName="email" type="email" class="form-control"
+                                    placeholder="Staff Email">
+                            </div>
+
+                            <div class="form-group">
+                                <input name="password" formControlName="password" type="password" class="form-control"
+                                    placeholder="Password">
+                            </div>
+                            <button class="btn btn-lg btn-primary btn-block">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

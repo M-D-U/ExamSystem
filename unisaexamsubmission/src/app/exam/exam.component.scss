@@ -1,0 +1,30 @@
+.container{
+    // 
+    margin: 0 auto;
+}
+
+.card{
+    // margin: 50px 0 0 0;
+    width: 50%;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+form{
+    margin: 10px 0 10px 0;
+}
+.form-control-file{
+    color: green;
+}
+input{
+    margin-left: 10px;
+}
+
+.btn{
+    width: 100%;
+}

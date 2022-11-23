@@ -1,0 +1,8 @@
+// importing data from another tabale sql command
+
+INSERT INTO studentinfo (studentNumber, studentName, studentEmail,studentPassword) 
+SELECT Disctinct StudentNumber, StudentName, StudentEmail, StudentPassword FROM data.table
+
+
+//create a migration 
+php artisan make:migration create_studentinfo_table --create=studentinfo
