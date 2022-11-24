@@ -15,9 +15,12 @@ class ExamSetupResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id' => $this->id,
             'dateExam' => $this->dateExam,
             'examPaperPDF' => $this->examPaperPDF,
-            'moduleCode' => $this->moduleCode
+            'moduleCode' => $this->moduleCode,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

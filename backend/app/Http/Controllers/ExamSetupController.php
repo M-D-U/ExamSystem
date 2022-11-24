@@ -33,13 +33,13 @@ class ExamSetupController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $moduleCode
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($moduleCode)
+    public function show($id)
     {
         //
-        return examsetup()::find($moduleCode);
+        return examsetup()::find($id);
     }
 
     /**
@@ -49,10 +49,10 @@ class ExamSetupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $moduleCode)
+    public function update(Request $request, $id)
     {
-        if(examsetup::where('moduleCode',$moduleCode)->exists()){
-            $examsetup = examsetup::find($moduleCode);
+        if(examsetup::where('id',$id)->exists()){
+            $examsetup = examsetup::find($id);
             $examsetup->dateExam = $request->dateExam;
             $examsetup->examPaperPDF = $request->examPaperPDF;
             $examsetup->moduleCode = $request->moduleCode;

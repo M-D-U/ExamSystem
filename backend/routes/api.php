@@ -17,17 +17,17 @@ use App\Http\Resources\ExamSetupResource;
 |
 */
 
-Route::get('/examsetup/{moduleCode}',function( examsetups $moduleCode){
-    return new ExamSetupResource(examsetup::findorFail($moduleCode));
+Route::get('/examsetup/{id}',function($id){
+    return new ExamSetupResource(examsetup::findorFail($id));
 });
 
 Route::get('/examsetups',function(){
     return ExamSetupResource::collection(examsetup::all());
 });
 
-Route::put('/examsetup/{moduleCode}',[ExamSetupController::class, 'update']);
+Route::put('/examsetup/{id}',[ExamSetupController::class, 'update']);
 
-Route::delete('/examsetup/{moduleCode}',[ExamSetupController::class,'destroy']);
+Route::delete('/examsetup/{id}',[ExamSetupController::class,'destroy']);
 
 Route::post('/examsetup',[ExamSetupController::class,'store']);
 
