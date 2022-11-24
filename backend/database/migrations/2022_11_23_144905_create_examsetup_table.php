@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('examsetup', function (Blueprint $table) {
-            $table->dateTime('dateExam')->nullable();
+            $table->date('dateExam')->nullable();
             $table->string('examPaperPDF')->nullable();
             $table->string('moduleCode')->index();//this syntax allows relationships between the tables
         });

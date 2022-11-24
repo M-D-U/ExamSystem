@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('examoutput', function (Blueprint $table) {
             $table->string('transactionID')->primary();
-            $table->dateTime('startTime')->nullable();
-            $table->dateTime('uploadTime')->nullable();
-            $table->string('answerPaperPDF')->nullable();
+            $table->string('startTime');
+            $table->string('uploadTime');
+            $table->string('answerPaperPDF');
             $table->string('studentNumber')->index();
         });
     }
