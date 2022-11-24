@@ -6,3 +6,6 @@ SELECT Disctinct StudentNumber, StudentName, StudentEmail, StudentPassword FROM 
 
 //create a migration 
 php artisan make:migration create_studentinfo_table --create=studentinfo
+
+//create a resource with model name 
+php artisan make:controller ExamSetupController --resource --model=examsetup

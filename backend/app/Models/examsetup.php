@@ -12,5 +12,8 @@ class examsetup extends Model
         'dateExam', 'examPaperPDF','moduleCode'
     ];
 
+    public function getRouteKeyName() {
+        return 'moduleCode';
+    }
     protected $table = 'examsetup';
 }
