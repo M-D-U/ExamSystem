@@ -4,21 +4,17 @@
             Upload Exam
         </div>
         <div class="card-body">
-            <select class="form-control">
-                <option>Module Code</option>
-                <option>ICT3715</option>
-                <option>Module Code</option>
-                <option>Module Code</option>
+            <select  class="form-control">
+                <option *ngFor="let exam of availableExams">{{exam.moduleCode}}</option>
             </select>
             <form action="/action_page.php">
-                <label for="birthday"><strong>Exam Date:</strong></label>
-                <input type="date" id="birthday" name="birthday">
-                <!-- <input type="submit"> -->
+                <label for="examDate"><strong>Exam Date:</strong></label>
+                <input type="date" id="examDate" name="examDate">
             </form>
             <form>
                 <div class="form-group">
-                  <label for="exampleFormControlFile1"><strong>Upload Exam Paper:</strong></label>
-                  <input type="file" accept=".PDF" class="form-control-file" id="exampleFormControlFile1">
+                  <label for="examPaper"><strong>Upload Exam Paper:</strong></label>
+                  <input type="file" accept=".PDF" name="examPaper" class="form-control-file" id="examPaper">
                 </div>
             </form>
             <button type="button" class="btn btn-primary">Upload Exam</button>
