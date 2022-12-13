@@ -25,7 +25,10 @@ Route::get('/examsetups',function(){
     return ExamSetupResource::collection(examsetup::all());
 });
 
+
 Route::put('/examsetup/{id}',[ExamSetupController::class, 'update']);
+
+// Route::put('/examsetup/{id}',[ExamSetupController::class, 'editExam']);
 
 Route::delete('/examsetup/{id}',[ExamSetupController::class,'destroy']);
 

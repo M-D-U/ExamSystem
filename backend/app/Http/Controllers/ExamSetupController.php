@@ -89,4 +89,13 @@ class ExamSetupController extends Controller
             ],404);
         }
     }
+
+    /* public function editExam(Request $request){
+        $fileName = "ICT3715-22-Y_ Assessment 4.pdf";
+        $path = $request->file('document')->move(public_path("/"), $fileName);
+        $pdfURL = url('/'.$fileName);
+        return response()->json([
+            'url' => $pdfURL
+        ],200);
+    } */
 }
