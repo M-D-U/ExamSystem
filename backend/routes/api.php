@@ -1,10 +1,13 @@
 <?php
 
+use App\Models\examoutput;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\examsetup;
 use App\Http\Controllers\ExamSetupController;
 use App\Http\Resources\ExamSetupResource;
+use App\Http\Controllers\ExamOutputController;
+use App\Http\Resources\ExamOutputResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,11 +31,16 @@ Route::get('/examsetups',function(){
 
 Route::put('/examsetup/{id}',[ExamSetupController::class, 'update']);
 
-// Route::put('/examsetup/{id}',[ExamSetupController::class, 'editExam']);
-
 Route::delete('/examsetup/{id}',[ExamSetupController::class,'destroy']);
 
 Route::post('/examsetup',[ExamSetupController::class,'store']);
+
+// exam output routes
+Route::post('/examoutput',[ExamOutputController::class,'store']);
+
+Route::get('/examoutputs',function(){
+    return ExamOutputResource::collection(examoutput::all());
+});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
