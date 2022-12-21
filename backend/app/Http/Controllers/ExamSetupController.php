@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Dotenv\Util\Str;
 use Illuminate\Http\Request;
 use App\Models\examsetup;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ExamSetupController extends Controller
 {
@@ -15,7 +18,7 @@ class ExamSetupController extends Controller
     public function index()
     {
         //
-        return examsetup()::all();
+        return examsetup::all();
     }
 
     /**
@@ -27,7 +30,7 @@ class ExamSetupController extends Controller
     public function store(Request $request)
     {
         //
-        return examsetup()::create($request->all());
+        return examsetup::create($request->all());
     }
 
     /**
@@ -39,7 +42,7 @@ class ExamSetupController extends Controller
     public function show($id)
     {
         //
-        return examsetup()::find($id);
+        return examsetup::find($id);
     }
 
     /**
@@ -51,23 +54,32 @@ class ExamSetupController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         if(examsetup::where('id',$id)->exists()){
-            $examsetup = examsetup::find($id);
+             $examsetup = examsetup::find($id);
             $examsetup->dateExam = $request->dateExam;
-            $examsetup->examPaperPDF = $request->examPaperPDF;
+            if($request->hasFile('examPaperPDF')){
+            $completeFileName = $request->file('examPaperPDF')->getClientOriginalName();
+            //    $fileNameOnly = pathinfo($completeFileName, PATHINFO_ALL);
+            //    $extension = $request->file('examPaperPDF')->getClientOriginalExtension();
+            //    $filename = str_replace('','_',$fileNameOnly).'-'.rand().'_'.time().'.'.$extension;
+            $path = $request->file('examPaperPDF')->storeAs('public/examPapers',$completeFileName);
+            dd($path);
+            }
             $examsetup->moduleCode = $request->moduleCode;
-
+            
             $examsetup->save();
+                return response()->json(['message' => 'all went well'], 422);
+            }else{
+                
             return response()->json([
-                "message" => "exam updated successfully"
+                "message" => "couldn't save your exam"
             ],200);
-        }else{
-            return response()->json([
-                "message" => "exam not found"
-            ],404);
-        }
+            }
+            
+    
+    
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -76,8 +88,8 @@ class ExamSetupController extends Controller
      */
     public function destroy($id)
     {
-        if(examsetup::where('moduleCode',$moduleCode)->exists()){
-            $examsetup = examsetup::find($moduleCode);
+        if(examsetup::where('id',$id)->exists()){
+            $examsetup = examsetup::find($id);
             $examsetup->delete();
 
             return response()->json([
@@ -90,6 +102,28 @@ class ExamSetupController extends Controller
         }
     }
 
+    public function file(request $request){
+        $examsetup = new examsetup;
+        $examsetup->dateExam = $request->dateExam;
+            if($request->hasFile('examPaperPDF')){
+            $completeFileName = $request->file('examPaperPDF')->getClientOriginalName();
+            //    $fileNameOnly = pathinfo($completeFileName, PATHINFO_ALL);
+            //    $extension = $request->file('examPaperPDF')->getClientOriginalExtension();
+            //    $filename = str_replace('','_',$fileNameOnly).'-'.rand().'_'.time().'.'.$extension;
+            $path = $request->file('examPaperPDF')->storeAs('public/examPapers',$completeFileName);
+            dd($path);
+            }
+            $examsetup->moduleCode = $request->moduleCode;
+            
+            $examsetup->save();
+                return response()->json(['message' => 'all went well'], 422);
+            /* else{
+                
+            return response()->json([
+                "message" => "couldn't save your exam"
+            ],200);
+            } */
+    }
     /* public function editExam(Request $request){
         $fileName = "ICT3715-22-Y_ Assessment 4.pdf";
         $path = $request->file('document')->move(public_path("/"), $fileName);
