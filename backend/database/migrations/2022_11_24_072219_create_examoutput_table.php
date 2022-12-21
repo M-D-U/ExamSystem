@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('uploadTime');
             $table->string('answerPaperPDF');
             $table->string('studentNumber')->index();
+            $table->timestamps(false);
         });
     }
 
