@@ -37,21 +37,35 @@ class ExamOutputController extends Controller
     {
         //
         // 
-        $completeFileName = new examoutput;
-        if($request->hasFile('answerPaperPDF')){
-            $completeFileName->transactionID = $request->transactionID;
-            $completeFileName->startTime = $request->startTime;
-            $completeFileName->uploadTime = $request->uploadTime;
-            $completeFileName = $request->file('answerPaperPDF')->getClientOriginalName();
-            dd($completeFileName);
-            $path = $request->file('answePaperPDF')->storeAs('public/answerPapersPDF', $completeFileName);
-            // $uploadPaper->answePaperPDF = $completeFileName;
-        }
-        if($completeFileName->save()){
-            return ['status' => true, 'message' => 'paper is saved'];
-        }else{
-            return ['status' => false, 'message' => 'paper is not saved'];
-        }
+        // $completeFileName = new examoutput;
+        // if($request->hasFile('answerPaperPDF')){
+        //     // $tracking = $request->string('transactionID');
+        //     $completeFileName->transactionID = $request->transactionID;
+        //     $completeFileName->startTime = $request->startTime;
+        //     $completeFileName->uploadTime = $request->uploadTime;
+        //     $completeFileName = $request->answerPaperPDF->file('answerPaperPDF')->getClientOriginalName();
+        //     // dd($completeFileName);
+        //     $path = $request->file('answePaperPDF')->storeAs('public/answerPapersPDF', $completeFileName);
+        //     // $uploadPaper->answePaperPDF = $completeFileName;
+        // }
+        // if($completeFileName->save()){
+        //     return ['status' => true, 'message' => 'paper is saved'];
+        // }else{
+        //     return ['status' => false, 'message' => 'paper is not saved'];
+        // }
+        $examout = new examoutput();
+        $examout->transactionID = $request->input('transactionID'); //retrieving user inputs
+        $examout->startTime = $request->input('startTime');  //retrieving user inputs
+        $examout->uploadTime = $request->input('uploadTime');  //retrieving user inputs
+        $examout->answerPaperPDF = $request->input('answerPaperPDF');  //retrieving user inputs
+        $examout->studentNumber = $request->input('studentNumber');  //retrieving user inputs
+        //$examout->save(); //storing values as an object
+        if($examout->save()){
+                return ['status' => true, 'message' => 'paper is saved'];
+            }else{
+                return ['status' => false, 'message' => 'paper is not saved'];
+             }
+        // return $examout;
     }
 
     /**

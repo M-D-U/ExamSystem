@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('examoutput', function (Blueprint $table) {
-            $table->string('transactionID')->primary();
+            $table->string('transactionID')->nullable()->primary();
             $table->string('startTime');
             $table->string('uploadTime');
-            $table->string('answerPaperPDF');
+            $table->string('answerPaperPDF')->nullable();
             $table->string('studentNumber')->index();
             $table->timestamps(false);
         });
