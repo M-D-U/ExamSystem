@@ -27,7 +27,7 @@ export class ExamComponent implements OnInit {
   showExams(){
     this.availableExams = this.examSetupService.showExams().subscribe(examsetup=>{
       this.availableExams = examsetup;
-      console.log(this.availableExams);
+      console.table(this.availableExams);
       
     });
   }

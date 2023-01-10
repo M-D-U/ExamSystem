@@ -15,6 +15,7 @@ class ExamOutputController extends Controller
     public function index()
     {
         //
+        examoutput::orderBy('transactionID', 'asc')->get();  //returns values in ascending order
     }
 
     /**
@@ -53,17 +54,25 @@ class ExamOutputController extends Controller
         // }else{
         //     return ['status' => false, 'message' => 'paper is not saved'];
         // }
-        $examout = new examoutput();
-        $examout->transactionID = $request->input('transactionID'); //retrieving user inputs
+        $examout = new examoutput;
+        $examout->transactionID = $request->input('transactionID').random_int(000000000000,999999999999); //retrieving user inputs
         $examout->startTime = $request->input('startTime');  //retrieving user inputs
         $examout->uploadTime = $request->input('uploadTime');  //retrieving user inputs
-        $examout->answerPaperPDF = $request->input('answerPaperPDF');  //retrieving user inputs
+        //$examout->answerPaperPDF = $request->input('answerPaperPDF');  //retrieving user inputs
+            if($request->hasFile('answerPaperPDF')){
+                $completeFileName = $request->file('answerPaperPDF')->getClientOriginalName();
+            $fileNameOnly = pathinfo($completeFileName, PATHINFO_FILENAME);
+            $extension = $request->file('answerPaperPDF')->getClientOriginalExtension();
+            $completePDF = str_replace('', '_', $fileNameOnly) . '_' . rand() . '_' . time() . '.' .$extension;
+            $path = $request->file('answerPaperPDF')->storeAs('public/answerPapersPDF', $completePDF);
+            $examout->answerPaperPDF = $completeFileName;
+            }
         $examout->studentNumber = $request->input('studentNumber');  //retrieving user inputs
         //$examout->save(); //storing values as an object
         if($examout->save()){
-                return ['status' => true, 'message' => 'paper is saved'];
+                return ['status' => true, 'message' => 'Your exam paper is saved'];
             }else{
-                return ['status' => false, 'message' => 'paper is not saved'];
+                return ['status' => false, 'message' => 'Exam paper is not saved, please try again'];
              }
         // return $examout;
     }

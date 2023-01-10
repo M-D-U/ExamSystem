@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ExamsetupService } from '../services/examsetup.service';
+import { ExamoutputService } from '../services/examoutput.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -7,54 +8,34 @@ import { ExamsetupService } from '../services/examsetup.service';
 })
 export class HomeComponent implements OnInit {
 
-  randomstring = '';
+
+  startTime = '10:23:11';
+  uploadTime = '11:23:11'
   user = 'OD MASEKO';
   studentNumber = 51331403
   date = new Date();
-  uploadDocument = false;
-  // examSetup = {name: 'CHE1809', DateExam: new Date(20220629), Description:' Introductory Chemisty in Industrial Development', staffEmail: 'jh.nel@unisa.ac.za', ExamPaper: '../assets/exampaper/101_2020_3b.pdf'};
-  constructor( private examSetupService: ExamsetupService) { }
+  uploadDocument = '';
+  answerPaperPDF = '';
+  // answerPaperPDF: { answerPaperPDF: string; }; 
+  examSetup = {name: 'CHE1809', DateExam: new Date(20220629), Description:' Introductory Chemisty in Industrial Development', staffEmail: 'jh.nel@unisa.ac.za', ExamPaper: '../assets/exampaper/101_2020_3b.pdf'};
+  constructor( private examSetupService: ExamsetupService, private examOutputServe:ExamoutputService) { }
 
-  availableExams: any;
+  examUpload: any;
   ngOnInit(): void {
-    // this.showDate();
     setInterval(() => {
       this.date = new Date();
     }, 1);
-
-    // this.showExams();
-    this.todayExam();
+    console.log(this.studentNumber,this.startTime,this.uploadTime,this.answerPaperPDF)
   }
 
+  uploadExam(answerPaperPDF:string){
+    this.examUpload = {
+      'startTime' : this.startTime,
+      'uploadTime' : this.uploadTime,
+      'answerPaperPDF': this.answerPaperPDF,
+      'studentNumber' : this.studentNumber
+    }; 
+    console.log(this.studentNumber);
+  } 
 
-  showExams(){
-    this.availableExams = this.examSetupService.showExams().subscribe(examsetup=>{
-      this.availableExams = examsetup;
-      console.log(this.availableExams);
-      
-    });
-  }
-
-  // check for todays exams for the specific student
-  todayExam(){
-    /* if(this.examSetup.name ==='CHE1709'){
-      console.log('today  are  writng');
-    }else{
-      console.log('relax for today');
-      console.log('your exam is on the '+ this.examSetup.DateExam)
-    } */
-  }  
-
-  upload(){
-  //  this.uploadDocument = !this.uploadDocument;
-    const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
-    const string_length = 12;let randomstring = '';
-    for (var i = 0; i < string_length; i++) {
-        var rnum = Math.floor(Math.random() * chars.length);
-        randomstring += chars[rnum];
-        console.log(randomstring +'random digits');
-    }
-    return randomstring;
-    
-  }
-}
+ }
