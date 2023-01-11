@@ -36,26 +36,16 @@ class ExamOutputController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // 
-        // $completeFileName = new examoutput;
-        // if($request->hasFile('answerPaperPDF')){
-        //     // $tracking = $request->string('transactionID');
-        //     $completeFileName->transactionID = $request->transactionID;
-        //     $completeFileName->startTime = $request->startTime;
-        //     $completeFileName->uploadTime = $request->uploadTime;
-        //     $completeFileName = $request->answerPaperPDF->file('answerPaperPDF')->getClientOriginalName();
-        //     // dd($completeFileName);
-        //     $path = $request->file('answePaperPDF')->storeAs('public/answerPapersPDF', $completeFileName);
-        //     // $uploadPaper->answePaperPDF = $completeFileName;
-        // }
-        // if($completeFileName->save()){
-        //     return ['status' => true, 'message' => 'paper is saved'];
-        // }else{
-        //     return ['status' => false, 'message' => 'paper is not saved'];
-        // }
         $examout = new examoutput;
-        $examout->transactionID = $request->input('transactionID').random_int(000000000000,999999999999); //retrieving user inputs
+        $refString = "R";
+        $examout->transactionID = $request->input('transactionID').$refString . ''.random_int(000000000000,999999999999) .trim(chunk_split($examout->transactionID), 3); //retrieving user inputs
+        // $examout->transactionID = str_split($examout->transactionID, 3);
+        // $examout->transactionID = trim(strrev(chunk_split(strrev($examout->transactionID), 3, '')));
+        /* $refString = "R";
+        $position = 0;
+
+        $examout->transactionID = str_split($examout->transactionID, 3); */ // . substr_replace($examout->transactionID, $refString, $position);
+        // dd($examout->transactionID);
         $examout->startTime = $request->input('startTime');  //retrieving user inputs
         $examout->uploadTime = $request->input('uploadTime');  //retrieving user inputs
         //$examout->answerPaperPDF = $request->input('answerPaperPDF');  //retrieving user inputs
@@ -68,7 +58,6 @@ class ExamOutputController extends Controller
             $examout->answerPaperPDF = $completeFileName;
             }
         $examout->studentNumber = $request->input('studentNumber');  //retrieving user inputs
-        //$examout->save(); //storing values as an object
         if($examout->save()){
                 return ['status' => true, 'message' => 'Your exam paper is saved'];
             }else{

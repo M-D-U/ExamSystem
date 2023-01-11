@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ExamsetupService } from '../services/examsetup.service';
 import { ExamoutputService } from '../services/examoutput.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -15,27 +16,33 @@ export class HomeComponent implements OnInit {
   studentNumber = 51331403
   date = new Date();
   uploadDocument = '';
-  answerPaperPDF = '';
+  exam = '';
+  // examUpload: any;
+  examUpload: any;
   // answerPaperPDF: { answerPaperPDF: string; }; 
   examSetup = {name: 'CHE1809', DateExam: new Date(20220629), Description:' Introductory Chemisty in Industrial Development', staffEmail: 'jh.nel@unisa.ac.za', ExamPaper: '../assets/exampaper/101_2020_3b.pdf'};
-  constructor( private examSetupService: ExamsetupService, private examOutputServe:ExamoutputService) { }
+  constructor(private formBuilder: FormBuilder, private examSetupService: ExamsetupService, private examOutputServe:ExamoutputService) { }
 
-  examUpload: any;
+  
   ngOnInit(): void {
     setInterval(() => {
       this.date = new Date();
     }, 1);
-    console.log(this.studentNumber,this.startTime,this.uploadTime,this.answerPaperPDF)
+
+    this.examUpload = this.formBuilder.group({
+      exam: ''
+    })
+    // console.log(this.studentNumber,this.startTime,this.uploadTime,this.answerPaperPDF)
   }
 
-  uploadExam(answerPaperPDF:string){
+  uploadExam(exam:string){
     this.examUpload = {
       'startTime' : this.startTime,
       'uploadTime' : this.uploadTime,
-      'answerPaperPDF': this.answerPaperPDF,
+      'answerPaperPDF': this.exam,
       'studentNumber' : this.studentNumber
     }; 
-    console.log(this.studentNumber);
+    console.log(this.studentNumber +'my stuff ');
   } 
 
  }
