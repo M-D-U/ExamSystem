@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('examsetup', function (Blueprint $table) {
             $table->id();//added the id to access the modules on the api routes for individual exam
-            $table->date('dateExam');
+            $table->date('dateExam')->nullable();
             $table->string('examPaperPDF')->nullable();
             $table->string('moduleCode')->index();//this syntax allows relationships between the tables
             $table->timestamps();//added timestamps to be able to update the exams
