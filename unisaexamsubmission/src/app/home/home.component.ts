@@ -3,6 +3,7 @@ import { ExamsetupService } from '../services/examsetup.service';
 import { ExamoutputService } from '../services/examoutput.service';
 import { NgForm } from '@angular/forms';
 import { HttpHeaders } from '@angular/common/http';
+// import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -35,7 +36,13 @@ export class HomeComponent implements OnInit {
       // add information to form data
       myFormData.append('startTime', this.startTime);
       myFormData.append('uploadTime', this.uploadTime);
-      myFormData.append('answerPaperPDF', this.answerPaperPDF);
+      // check if user has inserted a file before uploading 
+      if(!this.answerPaperPDF){
+        window.alert('please choose a file before submitting');
+        return 
+      }else{
+        myFormData.append('answerPaperPDF', this.answerPaperPDF);
+      };
       myFormData.append('studentNumber',this.studentNumber)
     // call the exam upload service api
     this.examOutputServe.uploadExamination(myFormData).subscribe((res) => {
@@ -44,9 +51,10 @@ export class HomeComponent implements OnInit {
       console.log(myFormData);
       if(res.status){
         window.alert(res.message)
-      };
+      }else{
+        window.alert(res.message)
+      }
     });
-    
   }
 
   // initializes the date
@@ -54,6 +62,7 @@ export class HomeComponent implements OnInit {
     setInterval(() => {
       this.date = new Date();//shows the current date and time on the application
     }, 1);
+    // this.toastr.success('Hello world!', 'Toastr fun!');
   }
  
 }
