@@ -38,32 +38,23 @@ class ExamOutputController extends Controller
     {
         $examout = new examoutput;
         $refString = "R";
-        $examout->transactionID = $request->input('transactionID').$refString . ''.random_int(000000000000,999999999999) .trim(chunk_split($examout->transactionID), 3); //retrieving user inputs
-        // $examout->transactionID = str_split($examout->transactionID, 3);
-        // $examout->transactionID = trim(strrev(chunk_split(strrev($examout->transactionID), 3, '')));
-        /* $refString = "R";
-        $position = 0;
-
-        $examout->transactionID = str_split($examout->transactionID, 3); */ // . substr_replace($examout->transactionID, $refString, $position);
-        // dd($examout->transactionID);
+        $examout->transactionID = $request->input('transactionID') . $refString . '' . random_int(000000000000, 999999999999);//.trim(chunk_split($examout->transactionID), 3); //retrieving user inputs
         $examout->startTime = $request->input('startTime');  //retrieving user inputs
         $examout->uploadTime = $request->input('uploadTime');  //retrieving user inputs
-        //$examout->answerPaperPDF = $request->input('answerPaperPDF');  //retrieving user inputs
             if($request->hasFile('answerPaperPDF')){
                 $completeFileName = $request->file('answerPaperPDF')->getClientOriginalName();
-            $fileNameOnly = pathinfo($completeFileName, PATHINFO_FILENAME);
-            $extension = $request->file('answerPaperPDF')->getClientOriginalExtension();
-            $completePDF = str_replace('', '_', $fileNameOnly) . '_' . rand() . '_' . time() . '.' .$extension;
-            $path = $request->file('answerPaperPDF')->storeAs('public/answerPapersPDF', $completePDF);
-            $examout->answerPaperPDF = $completeFileName;
+                $fileNameOnly = pathinfo($completeFileName, PATHINFO_FILENAME);
+                $extension = $request->file('answerPaperPDF')->getClientOriginalExtension();
+                $completePDF = str_replace('', '_', $fileNameOnly) . '_' . rand() . '_' . time() . '.' .$extension;
+                $path = $request->file('answerPaperPDF')->storeAs('public/answerPapersPDF', $completePDF);
+                $examout->answerPaperPDF = $completeFileName;
             }
         $examout->studentNumber = $request->input('studentNumber');  //retrieving user inputs
         if($examout->save()){
-                return ['status' => true, 'message' => 'Your exam paper is saved'];
+                return ['status' => true, 'message' => 'Your exam paper is submitted successfully'];
             }else{
                 return ['status' => false, 'message' => 'Exam paper is not saved, please try again'];
              }
-        // return $examout;
     }
 
     /**
