@@ -21,4 +21,8 @@ export class ExamoutputService {
     headers: this.headers
    });
   }
+
+  viewTotalExamSubmissions(){
+    return this.http.get(this.url+`/api/examoutputs`);
+  }
 }
