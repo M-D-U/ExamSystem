@@ -1,23 +1,29 @@
-<div class="container">
-    <div class="card">
-        <div class="card-header text-center">
-            Upload Exam
-        </div>
-        <div class="card-body">
-            <select  class="form-control">
-                <option *ngFor="let exam of availableExams">{{exam.moduleCode}}</option>
+<div class="card">
+    <div class="card-header text-center">Upload Exam</div>
+    <div class="card-body">
+        <form #f="ngForm" (ngSubmit)="onUpload(f,selectedValue.value)" enctype="multipart/form-data">
+            <label ><strong>Module Code: </strong></label>
+           <!--  <select #selectedValue (change)="onValueChange(selectedValue.value)">
+                <option *ngFor="let exam of availableExams" [value]="exam">{{ exam.moduleCode }}</option>
+            </select>  -->             
+            <!-- <select [(ngModel)]="moduleCode">
+                <option value="moduleCode" *ngFor="let exam of availableExams">
+                    {{ exam.moduleCode }}
+                </option>
+            </select> -->
+            <!-- <select #selectedValue (change)="onValueChange(selectedValue.value)">
+                <option *ngFor="let item of availableExams" [value]="item">{{item.moduleCode}}</option>
+            </select> -->
+            <select #selectedValue (change)="onValueChange(selectedValue.value)">
+                <option *ngFor="let module of availableExams" [value]="moduleCode">{{module.moduleCode}}</option>
             </select>
-            <form action="/action_page.php">
-                <label for="examDate"><strong>Exam Date:</strong></label>
-                <input type="date" id="examDate" name="examDate">
-            </form>
-            <form>
-                <div class="form-group">
-                  <label for="examPaper"><strong>Upload Exam Paper:</strong></label>
-                  <input type="file" accept=".PDF" name="examPaper" class="form-control-file" id="examPaper">
-                </div>
-            </form>
-            <button type="button" class="btn btn-primary" >Update Exam</button>
-        </div>
-      </div>
+            <br />
+            <label for="examDate"><strong>Exam Paper:</strong></label>
+            <input class="m-3" type="file" accept=".pdf" name="examPaperPDF" id="examPaperPDF" (change)="onFileSelected($event)" />
+            <br />
+            <label for="examDate"><strong>Exam Date:</strong></label>
+            <input class="mb-3" type="date" id="dateExam" [(ngModel)]="dateExam" name="examDate" />
+            <button class="btn btn-lg btn-primary btn-block">Create Exam</button>
+        </form>
+    </div>
 </div>
