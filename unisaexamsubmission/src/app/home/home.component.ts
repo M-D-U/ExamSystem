@@ -3,7 +3,6 @@ import { ExamsetupService } from '../services/examsetup.service';
 import { ExamoutputService } from '../services/examoutput.service';
 import { NgForm } from '@angular/forms';
 import { HttpHeaders } from '@angular/common/http';
-// import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -62,7 +61,6 @@ export class HomeComponent implements OnInit {
     setInterval(() => {
       this.date = new Date();//shows the current date and time on the application
     }, 1);
-    // this.toastr.success('Hello world!', 'Toastr fun!');
   }
  
 }
