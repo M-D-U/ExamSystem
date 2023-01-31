@@ -25,7 +25,7 @@
             </div>
                 <h4>Upload here</h4>
                 <form #f="ngForm" (ngSubmit)="onUpload(f)" enctype='multipart/form-data'>
-                    <input type="file" accept=".pdf" name="image" (change)="onFileSelected($event)"/>
+                    <input type="file" accept=".pdf" name="answerPaperPDF" (change)="onFileSelected($event)"/>
                     <button class="btn btn-lg btn-primary btn-block">Upload Image</button>
                 </form>
         </div>
