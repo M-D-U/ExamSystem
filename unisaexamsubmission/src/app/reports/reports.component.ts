@@ -29,6 +29,7 @@ export class ReportsComponent implements OnInit {
     });
   }
 
+  // total modules
   totalModules(){
     this.moduleinfoService.getTotalModules().subscribe((res) => {
       this.totalNumberModules = res;
