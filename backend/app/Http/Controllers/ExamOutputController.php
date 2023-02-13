@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\examoutput;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ExamOutputController extends Controller
 {
@@ -100,5 +101,9 @@ class ExamOutputController extends Controller
     public function destroy(examoutput $examoutput)
     {
         //
+    }
+
+    public function submissionsDaily(examoutput $examoutput){
+        $results = DB::select("SELECT count(description)AS submissions, day(DateExam )AS day_of_the_month from moduleinfo,examsetup group by day(DateExam )");
     }
 }
