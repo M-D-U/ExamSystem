@@ -26,9 +26,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->job(new \App\Jobs\BackupDatabase)->everyMinute();
-        $schedule->command('backup:run')->everyMinute();
-        $schedule->command('inspire')->everyMinute();
+        $schedule->job(new \App\Jobs\BackupDatabase)->daily();
+        $schedule->command('backup:run')->daily();
+        // $schedule->command('inspire')->everyMinute();
     }
 
     /**
