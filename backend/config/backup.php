@@ -9,7 +9,7 @@ return [
          * the backups.
          */
         'name' => env('APP_NAME', 'laravel-backup'),
-
+        'frequency' => ['minute'],
         'source' => [
 
             'files' => [
@@ -110,7 +110,12 @@ return [
             /*
              * The filename prefix used for the backup zip file.
              */
-            'filename_prefix' => '',
+            'filename_prefix' => 'UNISA-Backup-DB-',
+
+            /*
+            * The filename for the backup
+            */
+            'filename' => 'backup-{date}-{time}.zip',
 
             /*
              * The disk names on which the backups will be stored.
@@ -118,6 +123,11 @@ return [
             'disks' => [
                 'local',
             ],
+
+            /*
+            * The path where the backups will be saved
+            */
+            'path' => 'app/backups',
         ],
 
         /*

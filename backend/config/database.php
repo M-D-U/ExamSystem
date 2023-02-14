@@ -18,6 +18,14 @@ return [
     'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
+     * The backup frequency.
+     *
+     * You can use multiple frequency definitions.
+     * For example: 'daily', 'weekly'
+     */
+    'frequency' => ['minute'],
+
+    /*
     |--------------------------------------------------------------------------
     | Database Connections
     |--------------------------------------------------------------------------
