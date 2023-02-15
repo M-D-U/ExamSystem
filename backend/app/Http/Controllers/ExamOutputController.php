@@ -103,7 +103,17 @@ class ExamOutputController extends Controller
         //
     }
 
-    public function submissionsDaily(examoutput $examoutput){
-        $results = DB::select("SELECT count(description)AS submissions, day(DateExam )AS day_of_the_month from moduleinfo,examsetup group by day(DateExam )");
-    }
+    public function getDailyReport(Request $request, examoutput $examoutput)
+    {
+        $total_files = DB::select('SELECT COUNT(*) AS total_files FROM examoutput WHERE DATE(created_at) = CURDATE()');
+    
+        return response()->json(['total_files' => $total_files[0]->total_files]);
+    } 
+
+    public function getTotalFilesThisWeek(Request $request, examoutput $examoutput)
+{
+    $total_files = DB::select('SELECT COUNT(*) AS total_files FROM examoutput WHERE created_at BETWEEN DATE(NOW()) - INTERVAL 1 WEEK AND NOW()');
+    
+    return response()->json(['total_files' => $total_files[0]->total_files]);
+}
 }
