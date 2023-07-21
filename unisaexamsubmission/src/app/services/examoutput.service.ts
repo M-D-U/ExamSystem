@@ -25,4 +25,12 @@ export class ExamoutputService {
   viewTotalExamSubmissions(){
     return this.http.get(this.url+`/api/examoutputs`);
   }
+
+  viewTotalExamSubmissionsForToday(){
+    return this.http.get(this.url+`/api/examoutputs/total-files-today`);
+  }
+
+  viewTotalExamSubmissionsForWeek(){
+    return this.http.get(this.url+`/api/examoutputs/total-files-this-week`);
+  }
 }

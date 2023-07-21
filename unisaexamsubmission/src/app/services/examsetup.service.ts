@@ -10,7 +10,7 @@ export class ExamsetupService {
   httpClient: any;
   handleError: any;
   headers: HttpHeaders | { [header: string]: string | string[]; } | undefined;
-
+  examPaperPDF = '';
   constructor( private http:HttpClient ) { }
 
   uploadExamination(myFormData: any):Observable<any>{
@@ -21,6 +21,14 @@ export class ExamsetupService {
     headers: this.headers
    });
   }
+  
+/*   downloadPDF(moduleCode :string){
+    this.http.get(this.url+'/api/examsetups', { responseType: 'blob' }).subscribe(data => {
+      const file = new Blob([data], { type: 'application/pdf' });
+      const fileURL = URL.createObjectURL(file);
+      window.open(fileURL);
+  });
+  } */
 
   showExams(){
     return this.http.get<any>(this.url+'/api/examsetups');
