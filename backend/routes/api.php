@@ -60,6 +60,14 @@ Route::get('/examoutputs/total-files-today', [ExamOutputController::class, 'getD
 
 Route::get('/examoutputs/total-files-this-week', [ExamOutputController::class, 'getTotalFilesThisWeek']);
 
+Route::get('examsetups/download_exam_paper', [ExamsetupController::class, 'downloadExamPaper']);
+
+/* Route::get('/examoutputs/download-pdf', function() {
+    $filePath = storage_path('app/pdf/sample.pdf');
+    return response()->download($filePath, 'sample.pdf');
+}); */
+
+// Route::get('/examsetup/download-exam-paper/{filename}', [ExamSetupController::class, 'downloadExamPaper']);
 
 /* authentication for users */
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
