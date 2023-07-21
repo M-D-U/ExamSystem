@@ -3,26 +3,20 @@
       <div class="col">
         <div class="card">
             <div class="card-header text-center">
-                Submissions daily
+                Submissions Today
             </div>
             <div class="card-body">
-                <label class="totalSubmissionLbl">45</label><br>
-              <!-- <blockquote class="blockquote mb-0">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-              </blockquote> -->
+                <label class="totalSubmissionLbl">{{submissionsToday.total_files}}</label>
             </div>
           </div>
       </div>
       <div class="col">
         <div class="card">
             <div class="card-header text-center">
-                Submissions per week
+                Submissions this Week
             </div>
             <div class="card-body">
-                <label class="totalSubmissionLblw">4239 Week Number 45</label><br>
-                <label class="totalSubmissionLblw">5829 Week Number 46</label><br>
-                <label class="totalSubmissionLblw">672 Week Number 47</label>
+              <label class="totalSubmissionLbl">{{submissionThisWeek.total_files}}</label>
             </div>
           </div>
       </div>

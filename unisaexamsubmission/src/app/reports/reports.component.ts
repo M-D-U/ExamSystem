@@ -12,11 +12,15 @@ export class ReportsComponent implements OnInit {
   overallTotal = 0;
   totalNumberModules: any;
   toalcountModules = 0
+  submissionsToday  : any;
+  submissionThisWeek : any;
   constructor(private examOutputServe: ExamoutputService, private moduleinfoService: ModuleinfoService) { }
 
   ngOnInit(): void {
     this.getTotalSubmissions();
     this.totalModules();
+    this.todaySubmissionsToday();
+    this.todaySubmissionsForWeek();
   }
 
   // get the total number of exam submissions
@@ -28,6 +32,22 @@ export class ReportsComponent implements OnInit {
       console.table(res);
     });
   }
+
+  todaySubmissionsToday(){
+    this.examOutputServe.viewTotalExamSubmissionsForToday().subscribe((res) =>{
+      this.submissionsToday = res;
+      console.log(this.submissionsToday);
+    })
+  }
+
+
+  todaySubmissionsForWeek(){
+    this.examOutputServe.viewTotalExamSubmissionsForWeek().subscribe((res) =>{
+      this.submissionThisWeek = res;
+      console.log(this.submissionThisWeek);
+    })
+  }
+
 
   // total modules
   totalModules(){
