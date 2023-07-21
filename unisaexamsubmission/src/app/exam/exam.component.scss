@@ -28,3 +28,22 @@ input{
 .btn{
     width: 100%;
 }
+
+.errMessage{
+    color: red;
+    font-weight: 600;
+}
+
+.instructions{
+    padding: 15px;
+    background-color: rgb(11, 207, 11);
+    // border-radius: 5px;
+    width: 50%;
+    margin: 0 auto;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;;
+}
+
+.instructions-header{
+    text-decoration: underline !important;
+    font-weight: 600;
+}

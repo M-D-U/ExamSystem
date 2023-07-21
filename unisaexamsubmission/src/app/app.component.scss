@@ -1,3 +1,15 @@
-.navbar-brand{
-    margin: 0 10px 0 10px;
-}
+.logout {
+  padding: 10px;
+    li {
+      margin-left: auto; // This pushes the Logout button to the right
+    }
+  
+    .nav-link {
+      color: white; // This sets the text color to white, like the other nav links
+    }
+  }
+
+  .navbar-brand{
+    font-size: 40px;
+    padding: 10px;
+  }

@@ -48,7 +48,7 @@ export class ExamComponent implements OnInit {
   'ENG1018',
   'ENG1019',
   ];
-
+  errorMessage: string ='';
   
   constructor(private examSetupService: ExamsetupService) { }
 
@@ -67,9 +67,12 @@ export class ExamComponent implements OnInit {
 
   onValueChange(value: any) {
     console.log(value);
-    
     // this.http.post('https://api.example.com/values', { value }).subscribe();
   }
+
+
+
+
   // uploads the exam data to the API
   onUpload(f: NgForm,value:any) { 
     console.log(value +'check the module code to see if we can pick it up');
@@ -83,11 +86,12 @@ export class ExamComponent implements OnInit {
        myFormData.append('dateExam', this.dateExam);
       // check if user has inserted a file before uploading 
       if(!this.examPaperPDF){
-        window.alert('please choose a file before submitting');
+        // window.alert('please choose a file before submitting');
+        this.errorMessage = 'Please choose a PDF file before creating an exam';
         return 
       }else{
         myFormData.append('examPaperPDF', this.examPaperPDF);
-      };
+      }
       // call the exam upload service api
       this.examSetupService.uploadExamination(myFormData).subscribe((res) => {
       headers: headers//add headers to send form as multipart form

@@ -1,33 +1,41 @@
 <div class="container">
+    <app-loader [isLoading]="isLoading"></app-loader>
     <div class="jumbotron">
-        <h3>Welcome {{user}}({{studentNumber}})</h3>
-        <label #currentTime>{{date | date:'HH:mm:ss - d - MMM - yyyy ' }}</label>
+        <!-- <h3>Welcome {{ user }}({{ studentNumber }})</h3> -->
+        <label #currentTime>{{ date | date : "HH:mm:ss - d - MMM - yyyy " }}</label>
     </div>
     <div class="row">
-        <div class="column" style="background-color:#fff;">
-            <div>
-                <h5>Download your exam paper below </h5>
-                <label><strong>Code:</strong> {{examSetup.name}}</label><br>
-                <label><strong>Description:</strong>{{examSetup.Description}}</label><br>
-                <label><strong>Lecture Email:</strong> {{examSetup.staffEmail}}</label>
-                <br>
-                <!-- <label><strong>Download:</strong></label><a class="downloadLink" href="examSetup.ExamPaper"> {{examSetup.name}}{{examSetup.Description}}</a> -->
+        <div class="column" style="background-color: #fff">
+            <h1>Today's Exams:</h1>
+            <h5>Download your exam paper below</h5>
+            <div *ngFor="let availableExam of availableExams">
+                <!-- <ul>
+                    <li *ngFor="let exam of exams">
+                        {{ exam.name }} ({{ exam.date | date : "shortDate" }})
+                    </li>
+                </ul> -->
+
+                <label>
+                    <strong>Code:</strong> {{ availableExam.moduleCode }} - {{ availableExam.dateExam }} -
+                    <a (click)="downloadPDF()" rel="stylesheet" href="/backend/storage/app/examPapers/">{{ availableExam.examPaperPDF }}</a>
+                </label>
             </div>
         </div>
 
-        <div class="column" style="background-color:#fff;">
+        <div class="column" style="background-color: #fff">
             <div class="submissionInfoDiv">
                 <span id="timer"></span>
-                <h4>Upload your complated Exam Paper</h4>
-                <p>students need to verify that they are uploading the correct document before the submission closes</p>
+                <h4>Upload your completed Exam Paper</h4>
+                <p style="color:red;font-weight: 600;">
+                    students need to verify that they are uploading the correct document
+                </p>
                 <li>PDF Files only</li>
-                <li>File size max 10MB</li>
             </div>
-                <h4>Upload here</h4>
-                <form #f="ngForm" (ngSubmit)="onUpload(f)" enctype='multipart/form-data'>
-                    <input type="file" accept=".pdf" name="answerPaperPDF" (change)="onFileSelected($event)"/>
-                    <button class="btn btn-lg btn-primary btn-block">Upload Image</button>
-                </form>
+            <!-- <h4>Upload here</h4> -->
+            <form #f="ngForm" (ngSubmit)="onUpload(f)" enctype="multipart/form-data">
+                <input type="file" accept=".pdf" name="answerPaperPDF" (change)="onFileSelected($event)" />
+                <button class="btn btn-lg btn-primary btn-block">Upload Exam</button>
+            </form>
         </div>
     </div>
 </div>
