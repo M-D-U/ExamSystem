@@ -40,7 +40,7 @@ class ExamSetupController extends Controller
                 $completeFileName = $request->file('examPaperPDF')->getClientOriginalName();
                 $fileNameOnly = pathinfo($completeFileName, PATHINFO_FILENAME);
                 $extension = $request->file('examPaperPDF')->getClientOriginalExtension();
-                $completePDF = str_replace('', '_', $fileNameOnly) . '_' . rand() . '_' . time() . '.' .$extension;
+                $completePDF = $fileNameOnly . '.' .$extension;
                 $path = $request->file('examPaperPDF')->storeAs('public/examPapers', $completePDF);
                 $examsetup->examPaperPDF = $completeFileName;
             }
@@ -158,4 +158,20 @@ class ExamSetupController extends Controller
             'url' => $pdfURL
         ],200);
     } */
+
+    public function downloadExamPaper($filename)
+        {
+            $file_path = storage_path('public/examPapers/'.$filename);
+
+            if (file_exists($file_path)) {
+                $headers = [
+                    'Content-Type' => 'application/pdf',
+                ];
+
+                return response()->download($file_path, $filename, $headers);
+            } else {
+                abort(404);
+            }
+        }
+
 }
