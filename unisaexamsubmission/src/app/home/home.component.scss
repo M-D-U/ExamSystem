@@ -6,7 +6,7 @@
 /* Create two equal columns that floats next to each other */
 
 .column {
-    float: left;
+    // float: left;
     width: 45%;
     padding: 10px;
     margin-right: 30px;
@@ -18,11 +18,6 @@
     /* Should be removed. Only for demonstration */
 }
 
-.illustration {
-    height: 70%;
-    width: 70%;
-    padding: 50px;
-}
 
 
 /* Clear floats after the columns */
@@ -70,3 +65,18 @@ label ,h5{
 .submissionInfoDiv{
     margin: 10px 0 0 10px;
 }
+
+/* For devices with a maximum width of 480 pixels (mobile portrait) */
+@media screen and (max-width: 480px) {
+    /* Your mobile-specific CSS styles here */
+    .column {
+        margin: 0 auto;
+        width: 90%;
+        margin-bottom: 10px !important;
+    }
+  }
+  
+  /* For devices with a width between 481px and 768px (tablet portrait) */
+  @media screen and (min-width: 481px) and (max-width: 768px) {
+    /* Your tablet-specific CSS styles here */
+  }

@@ -1,19 +1,13 @@
 <div class="container">
     <app-loader [isLoading]="isLoading"></app-loader>
     <div class="jumbotron">
-        <!-- <h3>Welcome {{ user }}({{ studentNumber }})</h3> -->
         <label #currentTime>{{ date | date : "HH:mm:ss - d - MMM - yyyy " }}</label>
     </div>
     <div class="row">
         <div class="column" style="background-color: #fff">
-            <h1>Today's Exams:</h1>
+            <h1>Exams:</h1>
             <h5>Download your exam paper below</h5>
             <div *ngFor="let availableExam of availableExams">
-                <!-- <ul>
-                    <li *ngFor="let exam of exams">
-                        {{ exam.name }} ({{ exam.date | date : "shortDate" }})
-                    </li>
-                </ul> -->
 
                 <label>
                     <strong>Code:</strong> {{ availableExam.moduleCode }} - {{ availableExam.dateExam }} -
@@ -31,7 +25,6 @@
                 </p>
                 <li>PDF Files only</li>
             </div>
-            <!-- <h4>Upload here</h4> -->
             <form #f="ngForm" (ngSubmit)="onUpload(f)" enctype="multipart/form-data">
                 <input type="file" accept=".pdf" name="answerPaperPDF" (change)="onFileSelected($event)" />
                 <button class="btn btn-lg btn-primary btn-block">Upload Exam</button>
