@@ -47,3 +47,20 @@ input{
     text-decoration: underline !important;
     font-weight: 600;
 }
+
+/* For devices with a maximum width of 480 pixels (mobile portrait) */
+@media screen and (max-width: 480px) {
+    /* Your mobile-specific CSS styles here */
+    .card{
+        width: 90%;
+        margin-top: 150px;
+    }
+    .instructions{
+        width: 100%;
+    }
+  }
+  
+  /* For devices with a width between 481px and 768px (tablet portrait) */
+  @media screen and (min-width: 481px) and (max-width: 768px) {
+    /* Your tablet-specific CSS styles here */
+  }
