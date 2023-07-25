@@ -10,6 +10,7 @@ use App\Http\Resources\ExamSetupResource;
 use App\Http\Controllers\ExamOutputController;
 use App\Http\Resources\ExamOutputResource;
 use App\Http\Resources\ModuleInfoResource;
+use App\Http\Controllers\Auth\StudentAuthController;
 use Illuminate\Support\Facades\DB;
 
 /*
@@ -73,3 +74,23 @@ Route::get('examsetups/download_exam_paper', [ExamsetupController::class, 'downl
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+// Student Authentication
+Route::post('/login', [StudentAuthController::class, 'login']);
+
+// Staff Authentication
+Route::post('staff/login', 'Auth\StaffAuthController@login');
+
+
+Route::group(['middleware' => 'jwt.auth'], function () {
+    // Your protected routes go here
+   /*  Route::get('/examoutputs',function(){
+        return ExamOutputResource::collection(examoutput::all());
+    }); */
+
+    
+});
+
+
+Route::get('/test', [StudentAuthController::class, 'test']);
