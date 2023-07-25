@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'student' => [
+            'driver' => 'jwt', // Use JWT driver for student authentication
+            'provider' => 'students', // Specify the user provider for students
+        ],
     ],
 
     /*
@@ -64,7 +68,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-
+        'students' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\studentinfo::class, // Update the model reference for studentinfo
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
