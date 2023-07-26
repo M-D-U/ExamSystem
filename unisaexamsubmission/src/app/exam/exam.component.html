@@ -50,7 +50,7 @@
                     <!-- Add a download link for each row -->
                     <a [href]="getDownloadUrl(availableExam.examPaperPDF)" download><i class="bi bi-arrow-down-circle-fill"></i></a>
                   </td>
-                <td><a href="" class="btn"><i  class="bi bi-trash-fill" style="color: red;"></i></a></td>
+                <td><i (click)="onDeleteExam(availableExam.id)" class="bi bi-trash-fill" style="color: red;"></i></td>
             </tr>
         </tbody>
     </table>

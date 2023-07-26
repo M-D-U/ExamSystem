@@ -15,6 +15,7 @@ export class ExamComponent implements OnInit {
   dateExam: string = '';
   availableExams: any;
   value :any;
+  id : number | undefined;
   moduleCodes = [ 
   'AST2652',
   'ICT1113',
@@ -102,14 +103,31 @@ export class ExamComponent implements OnInit {
       }else{
         window.alert(res.message)
       }
+      this.showExams();
     });
+    
   }
-
+// Function to get the download URL for a PDF
+getDownloadUrl(pdfFileName: string): string {
+  // Assuming your API provides a route to download the PDF files like '/api/download/:filename'
+  // Replace ':filename' with the actual route parameter for the filename
+  return `${this.examSetupService.url}/api/download/${pdfFileName}`;
+}
   // shows the exams
    showExams(){
     this.availableExams = this.examSetupService.showExams().subscribe(examsetup=>{
       this.availableExams = examsetup;
       console.table(this.availableExams);
+    });
+  }
+
+  // delete an exam
+  onDeleteExam(id: number) {    
+    this.examSetupService.deleteExam(id).subscribe(res => {
+      console.log('Exam deleted successfully:', res);
+      // Refresh the exams list after deletion
+      window.alert('exam deleted');
+      this.showExams();
     });
   }
 }
