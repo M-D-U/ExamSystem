@@ -3,7 +3,7 @@
     margin: 0 auto;
 }
 
-.card{
+/* .card{
     // margin: 50px 0 0 0;
     width: 50%;
     margin: 0;
@@ -13,7 +13,7 @@
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-}
+} */
 
 form{
     margin: 10px 0 10px 0;
@@ -34,6 +34,11 @@ input{
     font-weight: 600;
 }
 
+
+.tableContainer{
+    margin: 20px !important;
+    // background-color: rgb(11, 207, 11);
+}
 .instructions{
     padding: 15px;
     background-color: rgb(11, 207, 11);
