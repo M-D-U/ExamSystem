@@ -66,6 +66,23 @@ label ,h5{
     margin: 10px 0 0 10px;
 }
 
+.warningContainer{
+    background: red !important;
+    text-align: center;
+    border-radius: 15px !important;
+}
+
+.warning{
+    color:white;
+    font-weight: 600;
+    padding: 10px;
+    
+}
+
+.bi-file-earmark-pdf-fill{
+    font-size: 25px;
+    text-align: center !important;
+}
 /* For devices with a maximum width of 480 pixels (mobile portrait) */
 @media screen and (max-width: 480px) {
     /* Your mobile-specific CSS styles here */
