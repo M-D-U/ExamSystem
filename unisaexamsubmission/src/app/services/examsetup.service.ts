@@ -1,6 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators'; 
+
+interface Exam {
+  id: number;
+  moduleCode: string;
+  dateExam: string;
+  examPaperPDF: string;
+  created_at: string;
+  updated_at: string;
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,6 +23,7 @@ export class ExamsetupService {
   handleError: any;
   headers: HttpHeaders | { [header: string]: string | string[]; } | undefined;
   examPaperPDF = '';
+  
   constructor( private http:HttpClient ) { }
 
   uploadExamination(myFormData: any):Observable<any>{
@@ -30,7 +43,20 @@ export class ExamsetupService {
   });
   } */
 
-  showExams(){
-    return this.http.get<any>(this.url+'/api/examsetups');
-  }
-}
+  showExams(): Observable<Exam[]> {
+    return this.http.get<Exam[]>(this.url + '/api/examsetups').pipe(
+      tap(response => {
+        // Log the original response to the console
+        console.log('Original Response from showExams():', response);
+
+        // Get the current date in the format "YYYY-MM-DD"
+        const currentDate = new Date().toISOString().split('T')[0];
+
+        // Filter the array to keep only objects with dateExam matching the current date
+        const examsForCurrentDate = response.filter(exam => exam.dateExam === currentDate);
+
+        // Log the filtered response to the console
+        console.log('Exams for Current Date:', examsForCurrentDate);
+      })
+    );
+}}

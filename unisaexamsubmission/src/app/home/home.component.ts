@@ -97,13 +97,14 @@ export class HomeComponent implements OnInit {
     console.log(this.timeOnly);
     let dateExam = '2023-07-21';
     let date = new Date(dateExam);
+
     this.examSetupService.showExams().subscribe((res) => {
-      // response shows the exams availbale
+      // response shows the exams available for the current day
       this.availableExams = res;
       console.log(this.availableExams);
       this.availableExams = this.availableExams.filter(
         (availableExam) =>
-          availableExam.date.toDateString() === new Date().toDateString()
+          availableExam.dateExam === new Date().toISOString().slice(0, 10)
       );
     });
 
