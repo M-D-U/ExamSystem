@@ -12,8 +12,9 @@
                 <label>
                     <strong>Code:</strong> {{ availableExam.moduleCode }} - {{ availableExam.dateExam }} -
                     <a (click)="downloadPDF()" rel="stylesheet" href="/backend/storage/app/examPapers/">{{ availableExam.examPaperPDF }}</a>
+                    
                 </label>
-            </div>
+            </div><p *ngIf="availableExams.length === 0">No exams today</p>
         </div>
 
         <div class="column" style="background-color: #fff">

@@ -98,6 +98,7 @@ export class HomeComponent implements OnInit {
     let dateExam = '2023-07-21';
     let date = new Date(dateExam);
 
+    if(this.examSetupService)
     this.examSetupService.showExams().subscribe((res) => {
       // response shows the exams available for the current day
       this.availableExams = res;
