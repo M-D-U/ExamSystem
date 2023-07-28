@@ -35,13 +35,17 @@ export class ExamsetupService {
    });
   }
   
-/*   downloadPDF(moduleCode :string){
-    this.http.get(this.url+'/api/examsetups', { responseType: 'blob' }).subscribe(data => {
-      const file = new Blob([data], { type: 'application/pdf' });
-      const fileURL = URL.createObjectURL(file);
-      window.open(fileURL);
+ downloadPDF(examPaperPDF :string): Observable<Blob>{
+  console.log(examPaperPDF+ 'this is the file to be downloaded');
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Accept': 'application/pdf'
   });
-  } */
+  return this.http.get(`${this.url}/api/examsetups/download_exam_paper/${examPaperPDF}`, {
+    headers: headers,
+    responseType: 'blob'
+  });
+  }
 
   showExams(): Observable<Exam[]> {
     return this.http.get<Exam[]>(this.url + '/api/examsetups').pipe(
@@ -59,4 +63,14 @@ export class ExamsetupService {
         console.log('Exams for Current Date:', examsForCurrentDate);
       })
     );
-}}
+}
+
+deleteExam(id: number): Observable<Exam[]> {
+  return this.http.delete<Exam[]>(this.url + '/api/examsetup/'+`${id}`).pipe(
+    tap(response => {
+      console.log('Response from deleteExam:', response);
+    })
+  );
+} 
+
+}
