@@ -61,7 +61,8 @@ Route::get('/examoutputs/total-files-today', [ExamOutputController::class, 'getD
 
 Route::get('/examoutputs/total-files-this-week', [ExamOutputController::class, 'getTotalFilesThisWeek']);
 
-Route::get('examsetups/download_exam_paper', [ExamsetupController::class, 'downloadExamPaper']);
+Route::get('examsetups/download_exam_paper/{filename}', [ExamSetupController::class, 'downloadExamPaper']);
+
 
 /* Route::get('/examoutputs/download-pdf', function() {
     $filePath = storage_path('app/pdf/sample.pdf');
