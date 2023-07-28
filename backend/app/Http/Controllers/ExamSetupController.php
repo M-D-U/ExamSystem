@@ -161,7 +161,7 @@ class ExamSetupController extends Controller
 
     public function downloadExamPaper($filename)
         {
-            $file_path = storage_path('public/examPapers/'.$filename);
+            /* $file_path = storage_path('public/examPapers/'.$filename);
 
             if (file_exists($file_path)) {
                 $headers = [
@@ -171,7 +171,29 @@ class ExamSetupController extends Controller
                 return response()->download($file_path, $filename, $headers);
             } else {
                 abort(404);
-            }
+            } */
+           /*  $file_path = public_path('storage/examPapers/'.$filename);
+
+    if (file_exists($file_path)) {
+        return response()->file($file_path);
+    } else {
+        abort(404);
+    } */
+
+    $file_path = public_path('storage/examPapers/' . $filename);
+
+    if (file_exists($file_path)) {
+        $headers = [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+        ];
+
+        $response = response()->file($file_path, $headers);
+        dd($response); // Dump the response to inspect it further
+        return $response;
+    } else {
+        abort(404);
+    }
         }
 
 }
