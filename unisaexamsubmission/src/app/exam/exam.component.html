@@ -1,6 +1,6 @@
 <div class="m-6  instructions py-2">
-    <p class="text-center instructions-header">Please note that to upload the exam the Lecture/Examiner should follow
-        the steps below</p>
+    <h3 class="text-center instructions-header">Please note that to upload the exam the Lecture/Examiner should follow
+        the steps below</h3>
     <li>Select the Module Code from the dropdown list</li>
     <li>Upload a PDF file</li>
     <li>Choose the date of the Exam</li>
@@ -8,22 +8,42 @@
 </div>
 <div class="d-flex justify-content-center" style="margin: 30px;">
     <div class="card w-50">
-        <div class="card-header text-center">Upload Exam</div>
+        <div class="card-header text-center">
+            <h6>Upload Exam</h6>
+        </div>
         <div class="card-body d-flex justify-content-center">
             <form #f="ngForm" (ngSubmit)="onUpload(f,selectedValue.value)" enctype="multipart/form-data">
-                <label><strong>Module Code: </strong></label>
-                <select #selectedValue (change)="onValueChange(selectedValue.value)">
-                    <option *ngFor="let module of moduleCodes" [value]="module">{{module}}</option>
-                </select>
-                <br />
-                <label for="examDate"><strong>Exam Paper:</strong></label>
-                <input class="m-3" type="file" accept=".pdf" size="10485760" name="examPaperPDF" id="examPaperPDF"
-                    (change)="onFileSelected($event)" />
-                <br />
-                <div *ngIf="errorMessage" class="errMessage">{{ errorMessage }}</div>
-                <label for="examDate"><strong>Exam Date:</strong></label>
-                <input class="mb-3" type="date" id="dateExam" [(ngModel)]="dateExam" name="examDate" />
-                <br />
+                <div class="row ">
+                    <div class="col-3">
+                        <label class="form-label">Module Code</label>
+                    </div>
+                    <div class="col-9">
+                        <select class="form-select" #selectedValue (change)="onValueChange(selectedValue.value)">
+                            <option *ngFor="let module of moduleCodes" [value]="module">{{module}}</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-3">
+                        <label for="formFile" class="form-label">Exam Paper</label>
+                    </div>
+                    <div class="col-9"><input class="form-control" type="file" accept=".pdf" size="10485760"
+                            name="examPaperPDF" id="examPaperPDF" (change)="onFileSelected($event)"></div>
+
+                </div>
+                <div class="row mt-3">
+                    <div class="col-3">
+                        <label class="form-label" for="examDate">Exam Date:</label>
+                    </div>
+                    <div class="col-9">
+                        <input style="width: 100%; border: 2px solid black; border-radius: 5px;" class="form-date"
+                            class="mb-3" type="date" id="dateExam" [(ngModel)]="dateExam" name="examDate" />
+                    </div>
+
+                </div>
+                <div *ngIf="errorMessage" class="errMessage py-2">{{ errorMessage }}</div>
                 <button class="btn btn-sm btn-primary btn-block w-100 ">Create Exam</button>
             </form>
         </div>
@@ -36,7 +56,7 @@
             <tr>
                 <th scope="col">Module Code</th>
                 <th scope="col">Exam Date</th>
-                <th scope="col">Created At</th>
+                <th scope="col">Exam Paper</th>
                 <th scope="col">Download PDF</th>
                 <th scope="col">Action</th>
             </tr>
@@ -48,10 +68,46 @@
                 <td>{{ availableExam.examPaperPDF }}</td>
                 <td>
                     <!-- Add a download link for each row -->
-                    <a [href]="getDownloadUrl(availableExam.examPaperPDF)" download><i class="bi bi-arrow-down-circle-fill"></i></a>
-                  </td>
+                    <a [href]="downloadExamPaper(availableExam.examPaperPDF)" download><i
+                            class="bi bi-arrow-down-circle-fill"></i></a>
+                </td>
                 <td><i (click)="onDeleteExam(availableExam.id)" class="bi bi-trash-fill" style="color: red;"></i></td>
             </tr>
         </tbody>
     </table>
+</div>
+
+
+<!-- Toast to show success message -->
+<div *ngIf="showSuccessToast" class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+        <strong class="me-auto">Success</strong>
+        <button type="button" class="btn-close" (click)="showSuccessToast = false" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        Exam uploaded successfully!
+    </div>
+</div>
+
+<!-- Toast to show error message -->
+<div *ngIf="showErrorToast" class="toast show bg-danger text-white" role="alert" aria-live="assertive"
+    aria-atomic="true">
+    <div class="toast-header">
+        <strong class="me-auto">Error</strong>
+        <button type="button" class="btn-close" (click)="showErrorToast = false" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        {{ errorMessage }}
+    </div>
+</div>
+
+<!-- Toast to show delete message -->
+<div *ngIf="deleteToast" class="toast show bg-danger text-white" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+        <!-- <strong class="me-auto">Success</strong> -->
+        <button type="button" class="btn-close" (click)="deleteToast = false" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        Exam Delete successfully
+    </div>
 </div>
